@@ -64,3 +64,11 @@ function getQuestions(ids, localityId) {
         }
     });
 }
+
+module.exports.getQuestionData = function(id) {
+    return new Promise(function(resolve, reject) {
+        mysqlService.execQuery("select * from answer as a,question as q where a.question_id=" + id).then(function(rows) {
+            resolve(rows);
+        });
+    });
+}

@@ -50,7 +50,7 @@ module.exports = function(req, res) {
             locality: results.locality.data,
             questions: results.question
         };
-        console.log('ihsbdihvbib', data.questions);
+        console.log(data.questions)
         template.render(data, res);
     });
 };

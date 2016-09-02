@@ -43,20 +43,19 @@
 </div>
 
 </div> 
-    <div id='questions' class='col-lg-12'>
-     <for each='question in data.questions'>
-    <div class="container">
-  <!-- <h2>${question.question}</h2> -->
+<div id='questions'>
+    <div  class='col-lg-12'>
+
+       <for each='question in data.questions'>
+    <div class="container questionContainer" link='${question.id}'>
   <div class="panel panel-default">
-    <div class="panel-heading">${question.question}</div>
+    <div class="panel-heading">${question.question} (${question.answer_count} Answers)</div>
     <div class="panel-body">${question.question}</div>
   </div>
 </div>
-</for> 
+</for>   
 </div>
-
-<!-- ${JSON.stringify(data.questions)} -->
- 
+</div> 
 
 
 

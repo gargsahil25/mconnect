@@ -54,17 +54,21 @@ function create(__helpers) {
                   '</li>');
               });
 
-              out.w('</ul></div></div><div class="col-lg-12"><div class="form-group"><label for="usr">Question</label><input type="text" class="form-control" id="question"></div></div> <div id="questions" class="col-lg-12">');
+              out.w('</ul></div></div><div class="col-lg-12"><div class="form-group"><label for="usr">Question</label><input type="text" class="form-control" id="question"></div></div> <div id="questions"><div class="col-lg-12">');
 
               forEach(data.questions, function(question) {
-                out.w('<div class="container"><div class="panel panel-default"><div class="panel-heading">' +
+                out.w('<div class="container questionContainer"' +
+                  attr("link", question.id) +
+                  '><div class="panel panel-default"><div class="panel-heading">' +
                   escapeXml(question.question) +
-                  '</div><div class="panel-body">' +
+                  ' (' +
+                  escapeXml(question.answer_count) +
+                  ' Answers)</div><div class="panel-body">' +
                   escapeXml(question.question) +
                   '</div></div></div>');
               });
 
-              out.w(' </div>');
+              out.w(' </div></div> ');
             });
         }
       });
