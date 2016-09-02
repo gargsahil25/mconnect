@@ -34,7 +34,7 @@ function create(__helpers) {
               "layout": __layoutHelper
             },
             function(out) {
-              out.w('<div class="col-lg-3"> <div class="dropdown"><button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="cityButton">Cities <span class="caret"></span></button><ul class="dropdown-menu scrollable-menu">');
+              out.w('<h1>mConnect</h1><div class="col-lg-6"> <div class="dropdown"><button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="cityButton">Cities <span class="caret"></span></button><ul class="dropdown-menu scrollable-menu">');
 
               forEach(data.cities, function(city) {
                 out.w('<li class="cityButton"' +
@@ -44,7 +44,7 @@ function create(__helpers) {
                   '</li>');
               });
 
-              out.w(' </ul></div></div><div class="col-lg-3"> <div class="dropdown"><button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Locality <span class="caret"></span></button><ul class="dropdown-menu scrollable-menu">');
+              out.w(' </ul></div></div><div class="col-lg-6"> <div class="dropdown"><button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Locality <span class="caret"></span></button><ul class="dropdown-menu scrollable-menu">');
 
               forEach(data.locality, function(locality) {
                 out.w('<li' +
@@ -54,18 +54,16 @@ function create(__helpers) {
                   '</li>');
               });
 
-              out.w('</ul></div></div><div class="col-lg-12"><div class="form-group"><label for="usr">Question</label><input type="text" class="form-control" id="question"></div></div> <div id="questions"><div class="col-lg-12">');
+              out.w('</ul></div></div><div class="col-lg-12"><div class="form-group"><label for="usr">Question</label><input type="text" class="form-control" id="question"></div></div> <div class="col-lg-12"><div id="questions">');
 
               forEach(data.questions, function(question) {
                 out.w('<div class="container questionContainer"' +
-                  attr("link", question.id) +
+                  attr("id", question.id) +
                   '><div class="panel panel-default"><div class="panel-heading">' +
                   escapeXml(question.question) +
                   ' (' +
                   escapeXml(question.answer_count) +
-                  ' Answers)</div><div class="panel-body">' +
-                  escapeXml(question.question) +
-                  '</div></div></div>');
+                  ' Answers)</div></div></div>');
               });
 
               out.w(' </div></div> ');

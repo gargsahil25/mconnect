@@ -14,14 +14,13 @@
     <div class="panel-heading">${data.question.question}</div>
     <div class="panel-body">
     <for each='answer in data.question.answers'> 
-    ${answer}<br>
+    ${answer.answer} Like ${answer.likeCount} Dis Like ${answer.dislikeCount}<br>
     </for>
     </div>
 
          
   </div>
 </div>
-</for>   
 </div>
 
 

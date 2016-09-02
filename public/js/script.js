@@ -11,6 +11,7 @@
 
 
 $("#question").keyup(getQuestions);
+$(".questionContainer").click(redirectToQuesPage);
 
 function getQuestions() {
     $("#questions").html('');
@@ -30,4 +31,3 @@ function redirectToQuesPage() {
     window.location.assign('/question?questionId=' + id);
 };
 
-$(".questionContainer").click(redirectToQuesPage);
