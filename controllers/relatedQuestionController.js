@@ -1,6 +1,6 @@
 var questionService = require('../services/questionService.js');
 var mysqlService = require('../services/mysqlService.js');
-var template = require('../templates/question.marko')
+var template = require('../templates/relatedQuestion.marko')
 
 module.exports = function(req, res) {
     var localityId = req.query.localityId;

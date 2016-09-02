@@ -27,7 +27,7 @@ function getQuestions() {
 
 function redirectToQuesPage() {
     var id = $(".questionContainer").attr('link');
-    window.location.assign('/question-page?questionId=' + id);
+    window.location.assign('/question?questionId=' + id);
 };
 
 $(".questionContainer").click(redirectToQuesPage);

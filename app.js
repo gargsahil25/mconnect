@@ -10,9 +10,8 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 app.use(express.static(__dirname + '/public'));
 
 // pages
-app.get('/', require('./controllers/homeController'));
-app.get('/question', require('./controllers/questionController'));
-app.get('/question-page', require('./controllers/questionPageController'));
+app.get('/', require('./controllers/homePageController'));
+app.get('/question', require('./controllers/questionPageController'));
 
 // api
 app.get('/related-question', require('./controllers/relatedQuestionController'));
