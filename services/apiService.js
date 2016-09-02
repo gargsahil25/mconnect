@@ -27,5 +27,36 @@ module.exports.get = function(url) {
             }
         });
     });
-}
+};
 
+
+module.exports.post = function(url, data, sendHeaders) {
+    return new Promise(function(resolve, reject) {
+        var options = {
+            method: 'POST',
+            url: url,
+            json: true,
+            body: data
+        };
+
+        if (sendHeaders) {
+            options.headers = {
+                'Authorization': 'key=AIzaSyDoOjJVsSzCe_YkuKf7PaG167fsJNzp1pk',
+                'Content-Type': 'application/json'
+            }
+        }
+
+        //console.log("POSTING OPTIONS: ", JSON.stringify(options));
+        request(options,
+            function(error, response, body) {
+                if (error) {
+                    console.log(error)
+                    reject(error);
+                    throw error;
+                } else {
+                    console.log("POSTING RESPONSE: ", JSON.stringify(body));
+                    resolve(body);
+                }
+            });
+    });
+};

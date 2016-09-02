@@ -16,6 +16,7 @@ app.get('/question-page', require('./controllers/questionPageController'));
 
 // api
 app.get('/related-question', require('./controllers/relatedQuestionController'));
+app.get('/rate-answer', require('./controllers/rateController'));
 
 questionService.init();
 
