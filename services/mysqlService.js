@@ -2,9 +2,9 @@ var mysql = require("mysql");
 
 var con = mysql.createPool({
     connectionLimit: 50,
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
+    host: '10.10.2.131',
+    user: 'sahil',
+    password: 'mConnect@123',
     database: 'mconnect'
 });
 
