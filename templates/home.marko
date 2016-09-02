@@ -1,28 +1,45 @@
-<html lang="en">
-  <head>
-    <title>Bootstrap 101 Template</title>
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>  
-    <script src="js/script.js"></script>
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  </head>
+<layout-use template="./base.marko">
 
-  <body>
-    <h1>Hello, world!</h1>
+    <layout-put into="styles">
+        <link rel="stylesheet" href="css/home.css">
+    </layout-put>
+
+
+    <layout-put into="body">
+        <h1>Hello, world!</h1>
+
+    <div class='col-lg-3'> 
+    <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id='cityButton'>Cities
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu scrollable-menu">
+    <for each='city in data.cities'>
+        <li class='cityButton' value='${city.id}'>${city.label}</li>
+    </for>
+    </ul>
+    </div>
+
+
+    </div>
+        <div class='col-lg-3'> 
 
     <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
-  <span class="caret"></span></button>
-  <ul class="dropdown-menu">
-    <li><a href="#">HTML</a></li>
-    <li><a href="#">CSS</a></li>
-    <li><a href="#">JavaScript</a></li>
-  </ul>
-</div>
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Locality
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu scrollable-menu">
+    <for each='locality in data.locality'>
+        <li id='${locality.id}'>${city.locality}</li>
+    </for>
+    </ul>
+    </div>
+    </div>
+
+
+
 
     
 
-  </body>
-</html>
+    </layout-put>
+</layout-use>
 
 

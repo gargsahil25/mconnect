@@ -1,6 +1,15 @@
 var request = require('request')
 
+
+module.exports.getURL = function(url, selectorOpts) {
+    if (url.match(/\?/)) {
+        return url + '&selector=' + JSON.stringify(selectorOpts);
+    }
+    return url + '?selector=' + JSON.stringify(selectorOpts);
+};
+
 module.exports.get = function(url) {
+    
     return new Promise(function(resolve, reject) {
         console.log("GET URL: ", url);
         request({
@@ -19,3 +28,4 @@ module.exports.get = function(url) {
         });
     });
 }
+

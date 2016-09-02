@@ -42,8 +42,9 @@ module.exports.find = function(localityId, text) {
         }
     }
     var sortedQuestions = Object.keys(questionMap).sort(function(a, b) {
-        return questionMap[b] - questionMap[a]; 
+        return questionMap[b] - questionMap[a];
     });
-    console.log(JSON.stringify(sortedQuestions));
-    return sortedQuestions;
+    // console.log(JSON.stringify(sortedQuestions));
+    return new Promise(resolve => resolve(sortedQuestions));
+    // return sortedQuestions;
 };
