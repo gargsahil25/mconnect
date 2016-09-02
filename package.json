@@ -1,7 +1,10 @@
 {
-  "name": "wynk",
+  "name": "mconnect",
   "version": "1.0.0",
   "description": "",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "body-parser": "^1.15.0",
     "express": "^4.14.0",

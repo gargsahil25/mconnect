@@ -9,10 +9,10 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 app.use(express.static(__dirname + '/public'));
 
 // pages
-app.get('/', require('./controllers/listController'));
+app.get('/', require('./controllers/homeController'));
 
 // api
-app.get('/list', require('./controllers/listDataController'));
+//app.get('/list', require('./controllers/listDataController'));
 
 app.use(function(req, res, next) {
     res.send('404');

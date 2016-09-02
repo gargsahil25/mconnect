@@ -1,0 +1,6 @@
+{
+  "name": "property-exchange",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.3.7"  }
+}
