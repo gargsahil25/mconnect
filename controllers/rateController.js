@@ -23,10 +23,17 @@ module.exports = function(req, res) {
             });
         },
         rate: ['getRating', function(callback, results) {
-            mysqlService.execQueryParams("insert into answer_rating (answer_id, is_like, user_id) values (?,?,?)", [answerId, isLike, userId]).then(function(result) {
-                //console.log(result);
-                callback(null, result);
-            });
+            if (results.getRating && results.getRating.length > 0) {
+            	mysqlService.execQueryParams("update answer_rating set is_like = ? where answer_id = ? and user_id = ?", [isLike, answerId, userId]).then(function(result) {
+                    //console.log(result);
+                    callback(null, result);
+                });
+            } else {
+                mysqlService.execQueryParams("insert into answer_rating (answer_id, is_like, user_id) values (?,?,?)", [answerId, isLike, userId]).then(function(result) {
+                    //console.log(result);
+                    callback(null, result);
+                });
+            }
         }],
         count: ['rate', function(callback, results) {
             mysqlService.execQueryParams("select is_like, count(*) as count from answer_rating where answer_id = ? group by is_like", [answerId]).then(function(result) {
