@@ -16,6 +16,8 @@ app.get('/question', require('./controllers/questionPageController'));
 // api
 app.get('/related-question', require('./controllers/relatedQuestionController'));
 app.get('/rate-answer', require('./controllers/rateController'));
+app.get('/save-question', require('./controllers/saveQuestionController'));
+app.get('/save-answer', require('./controllers/saveAnswerController'));
 
 questionService.init();
 
