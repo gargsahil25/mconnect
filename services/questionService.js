@@ -1,4 +1,6 @@
 var mysqlService = require('../services/mysqlService.js');
+var commonService = require('../services/commonService');
+
 var wordMap = {};
 var totalQuestions = 0;
 
@@ -70,5 +72,24 @@ module.exports.getQuestionData = function(id) {
         mysqlService.execQuery("select *,a.id as answer_id from answer as a,question as q where a.question_id=q.id and a.question_id=" + id).then(function(rows) {
             resolve(rows);
         });
+    });
+}
+module.exports.getBoughtAnswersData = function(id, quesId) {
+    return new Promise(function(resolve, reject) {
+        mysqlService.execQuery("select *,a.id as answer_id from buy_answer as ba,answer as a where ba.answer_id=a.id and ba.user_id=" + id + " and a.question_id=" + quesId).then(function(rows) {
+            resolve(rows);
+        });
+    });
+}
+module.exports.getLikedDislikedAns = function(userId) {
+    return new Promise(function(resolve, reject) {
+        mysqlService.execQuery("select answer_id,is_like from answer_rating where user_id=" + userId).then(function(rows) {
+            resolve(rows);
+        });
+    });
+}
+module.exports.buyOneAnswer = function(userId, ansId) {
+    return mysqlService.execQueryParams('insert into buy_answer (user_id,answer_id) values(?,?)', [userId, ansId]).then(function(rows) {
+        return commonService.increaseCount(userId, -1);
     });
 }

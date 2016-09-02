@@ -26,8 +26,12 @@ function getQuestions() {
     });
 };
 
-function redirectToQuesPage() {
-    var id = $(".questionContainer").attr('link');
-    window.location.assign('/question?questionId=' + id);
+function redirectToQuesPage(el) {
+    var id = el.currentTarget.id;
+    var answerCount = el.currentTarget.childNodes[0].id;
+    if (parseInt(answerCount, 10) != 0) {
+        window.location.assign('/question?questionId=' + id);
+    } else {
+        window.alert('bsidfbisudbfiusdbdf');
+    }
 };
-

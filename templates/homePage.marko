@@ -47,7 +47,7 @@
 
        <for each='question in data.questions'>
     <div class="container questionContainer" id='${question.id}'>
-  <div class="panel panel-default">
+  <div class="panel panel-default" id='${question.answer_count}'>
     <div class="panel-heading">${question.question} (${question.answer_count} Answers)</div>
   </div>
 </div>

@@ -14,7 +14,16 @@
     <div class="panel-heading">${data.question.question}</div>
     <div class="panel-body">
     <for each='answer in data.question.answers'> 
-    ${answer.answer} Like ${answer.likeCount} Dis Like ${answer.dislikeCount}<br>
+    ${answer.answer}
+
+    <if test='!data.likedDisliked.like[answer.id]'>
+    <button type="button" class="btn btn-success">Like</button>${answer.likeCount}
+    </if>
+    <if test='!data.likedDisliked.dislike[answer.id]'>
+    <button type="button" class="btn btn-danger">Dislike</button>${answer.dislikeCount}
+    </if>
+
+<br>
     </for>
     </div>
 
