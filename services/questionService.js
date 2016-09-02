@@ -47,14 +47,14 @@ module.exports.find = function(localityId, text) {
     var sortedQuestions = Object.keys(questionMap).sort(function(a, b) {
         return questionMap[b] - questionMap[a];
     });
-    //console.log(JSON.stringify(sortedQuestions));
-    return getQuestions(sortedQuestions);
+    console.log(JSON.stringify(sortedQuestions));
+    return getQuestions(sortedQuestions, localityId);
 };
 
-function getQuestions(ids) {
+function getQuestions(ids, localityId) {
     return new Promise(function(resolve, reject) {
         if (ids.length == 0) {
-            mysqlService.execQueryParams("select * from question where locality_id = ? order by answer_count desc, id desc", [localityId]).then(function(rows) {
+            mysqlService.execQueryParams("select * from question where locality_id = ? order by answer_count desc", [localityId]).then(function(rows) {
                 resolve(rows);
             });
         } else {
