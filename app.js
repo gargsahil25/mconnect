@@ -2,6 +2,7 @@ require('marko/node-require').install()
 
 var express = require('express');
 var bodyParser = require('body-parser');
+var questionService = require('./services/questionService');
 var app = express();
 
 app.use(bodyParser.json({ limit: '50mb' }))
@@ -13,7 +14,9 @@ app.get('/', require('./controllers/homeController'));
 app.get('/question', require('./controllers/questionController'));
 
 // api
-//app.get('/list', require('./controllers/listDataController'));
+app.get('/related-question', require('./controllers/relatedQuestionController'));
+
+questionService.init();
 
 app.use(function(req, res, next) {
     res.send('404');
