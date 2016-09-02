@@ -1,7 +1,6 @@
 var mysqlService = require('../services/mysqlService.js');
 var apiService = require('../services/apiService.js');
 var configService = require('../services/configService.js');
-var commonService = require('../services/commonService.js');
 var async = require('async')
 
 module.exports = function(req, res) {
@@ -25,7 +24,7 @@ module.exports = function(req, res) {
         },
         rate: ['getRating', function(callback, results) {
             if (results.getRating && results.getRating.length > 0) {
-                mysqlService.execQueryParams("update answer_rating set is_like = ? where answer_id = ? and user_id = ?", [isLike, answerId, userId]).then(function(result) {
+            	mysqlService.execQueryParams("update answer_rating set is_like = ? where answer_id = ? and user_id = ?", [isLike, answerId, userId]).then(function(result) {
                     //console.log(result);
                     callback(null, result);
                 });
@@ -37,7 +36,7 @@ module.exports = function(req, res) {
             }
         }],
         count: ['rate', function(callback, results) {
-            commonService.getLikeDislikeCount(answerId).then(function(result) {
+            mysqlService.execQueryParams("select is_like, count(*) as count from answer_rating where answer_id = ? group by is_like", [answerId]).then(function(result) {
                 //console.log(result);
                 var obj = {
                     likeCount: 0,
