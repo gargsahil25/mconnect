@@ -1,6 +1,5 @@
 var mysqlService = require('../services/mysqlService.js');
 var apiService = require('../services/apiService.js');
-var configService = require('../services/configService.js');
 var commonService = require('../services/commonService.js');
 var async = require('async')
 
@@ -57,21 +56,13 @@ module.exports = function(req, res) {
     }, function(err, results) {
         // console.log(err);
         // console.log(JSON.stringify(results));
-        apiService.post('https://android.googleapis.com/gcm/send', {
-            'registration_ids': [configService.gcmId],
-            'data': {
-                'type': 'showRating',
-                'data': {
-                    'question': results.answer.question,
-                    'answer': results.answer.answer,
-                    'likeCount': results.count.likeCount,
-                    'dislikeCount': results.count.dislikeCount
-                }
-            }
-        }, true).then(function(response) {
+        commonService.sendNotification('showRating', {
+            'question': results.answer.question,
+            'answer': results.answer.answer,
+            'likeCount': results.count.likeCount,
+            'dislikeCount': results.count.dislikeCount
+        }).then(function(response) {
             res.send(true);
         });
-
-
     });
 };
