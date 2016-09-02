@@ -6,10 +6,10 @@
 
 
     <layout-put into="body">
-
+    <h1>mConnect</h1>
          <!-- ${JSON.stringify(data)} -->
 
-     <div class='col-lg-3'> 
+    <div class='col-lg-6'> 
     <div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id='cityButton'>Cities
     <span class="caret"></span></button>
@@ -22,7 +22,7 @@
 
 
     </div>
-        <div class='col-lg-3'> 
+        <div class='col-lg-6'> 
 
     <div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Locality
@@ -42,14 +42,13 @@
 </div>
 
 </div> 
-<div id='questions'>
     <div  class='col-lg-12'>
+<div id='questions'>
 
        <for each='question in data.questions'>
-    <div class="container questionContainer" link='${question.id}'>
+    <div class="container questionContainer" id='${question.id}'>
   <div class="panel panel-default">
     <div class="panel-heading">${question.question} (${question.answer_count} Answers)</div>
-    <div class="panel-body">${question.question}</div>
   </div>
 </div>
 </for>   
