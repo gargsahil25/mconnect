@@ -1,4 +1,4 @@
-var template = require('../templates/home.marko')
+var template = require('../templates/questionData.marko')
 var async = require('async')
 var apiService = require('../services/apiService')
 var mockUserDetails = require('../mockUserDetails');
@@ -15,9 +15,21 @@ module.exports = function(req, res) {
     }
     return async.auto(config, (err, results) => {
         var data = {
-            question: results.question
+            question: parse(results.question)
         };
         console.log(data.question);
-        // template.render(data, res);
+        template.render(data, res);
     });
 };
+
+function parse(arr) {
+    var object = {};
+    object = arr[0];
+    object.answers = [];
+
+    for (var i = 0; i < arr.length; i++) {
+        object.answers.push(arr[i].answer);
+    }
+
+    return object;
+}

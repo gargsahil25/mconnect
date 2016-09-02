@@ -34,7 +34,7 @@ function create(__helpers) {
               "layout": __layoutHelper
             },
             function(out) {
-              out.w('<h1>Hello, world!</h1><div class="col-lg-3"> <div class="dropdown"><button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="cityButton">Cities <span class="caret"></span></button><ul class="dropdown-menu scrollable-menu">');
+              out.w('<div class="col-lg-3"> <div class="dropdown"><button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="cityButton">Cities <span class="caret"></span></button><ul class="dropdown-menu scrollable-menu">');
 
               forEach(data.cities, function(city) {
                 out.w('<li class="cityButton"' +
