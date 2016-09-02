@@ -19,6 +19,7 @@ module.exports.init = function() {
                 wordMap[localityId][word].push(question.id);
             }
         }
+        //console.log(JSON.stringify(wordMap));
     });
 };
 
@@ -34,6 +35,7 @@ module.exports.find = function(localityId, text) {
         if (!map[word] || map[word].length > totalQuestions / 3) {
             continue;
         }
+        //console.log(JSON.stringify(map[word]));
         for (var q of map[word]) {
             if (!questionMap[q]) {
                 questionMap[q] = 0;
@@ -41,24 +43,22 @@ module.exports.find = function(localityId, text) {
             questionMap[q]++;
         }
     }
+    //console.log(JSON.stringify(questionMap));
     var sortedQuestions = Object.keys(questionMap).sort(function(a, b) {
         return questionMap[b] - questionMap[a];
     });
-    return getQuestions(sortedQuestions);
+    console.log(JSON.stringify(sortedQuestions));
+    return getQuestions(sortedQuestions, localityId);
 };
 
-function getQuestions(ids) {
+function getQuestions(ids, localityId) {
     return new Promise(function(resolve, reject) {
         if (ids.length == 0) {
-            mysqlService.execQueryParams("select * from question where locality_id = ? order by answer_count desc, timestamp desc", [localityId]).then(function(rows) {
-                resolve(rows);
-            });
-        } else if (ids.length == 1) {
-            mysqlService.execQueryParams("select * from question where id = ?", ids).then(function(rows) {
+            mysqlService.execQueryParams("select * from question where locality_id = ? order by answer_count desc", [localityId]).then(function(rows) {
                 resolve(rows);
             });
         } else {
-            mysqlService.execQueryParams("select * from question where id in ?", [ids]).then(function(rows) {
+            mysqlService.execQuery("select * from question where id in (" + ids.join(',') + ")").then(function(rows) {
                 resolve(rows);
             });
         }
