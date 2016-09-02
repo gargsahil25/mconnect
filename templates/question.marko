@@ -1,7 +1,12 @@
 <layout-use template="./base.marko">
     <layout-put into="body">
-    	  <for each="question in data.questions">
-		     <h3>${question.question}</h3>
-		  </for>
+    	  <for each='question in data.questions'>
+    <div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">${question.question}</div>
+    <div class="panel-body">${question.question}</div>
+  </div>
+</div>
+</for>
     </layout-put>
 </layout-use>

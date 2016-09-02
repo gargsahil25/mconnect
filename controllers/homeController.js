@@ -48,9 +48,9 @@ module.exports = function(req, res) {
         var data = {
             cities: results.cities.data,
             locality: results.locality.data,
-            question: results.question
+            questions: results.question
         };
-        console.log(data.question);
+        console.log('ihsbdihvbib', data.questions);
         template.render(data, res);
     });
 };
@@ -68,6 +68,7 @@ function fetchCities() {
 
     var promise = apiService.get(url).then(function(response) {
             cityPromise = promise;
+            console.log('city data');
             return response;
         },
         function() {
@@ -103,6 +104,7 @@ function fetchLocalities(cityId) {
 
     var promise = apiService.get(url).then(function(response) {
         cityPromise = promise;
+        console.log('locality data');
         return response;
     });
 

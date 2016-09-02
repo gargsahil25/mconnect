@@ -44,17 +44,27 @@ function create(__helpers) {
                   '</li>');
               });
 
-              out.w('</ul></div></div><div class="col-lg-3"> <div class="dropdown"><button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Locality <span class="caret"></span></button><ul class="dropdown-menu scrollable-menu">');
+              out.w(' </ul></div></div><div class="col-lg-3"> <div class="dropdown"><button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Locality <span class="caret"></span></button><ul class="dropdown-menu scrollable-menu">');
 
               forEach(data.locality, function(locality) {
                 out.w('<li' +
-                  attr("id", locality.id) +
+                  attr("id", locality.localityId) +
                   '>' +
-                  escapeXml(city.locality) +
+                  escapeXml(locality.label) +
                   '</li>');
               });
 
-              out.w('</ul></div></div>');
+              out.w('</ul></div></div><div class="col-lg-12"><div class="form-group"><label for="usr">Question</label><input type="text" class="form-control" id="question"></div></div> <div id="questions" class="col-lg-12">');
+
+              forEach(data.questions, function(question) {
+                out.w('<div class="container"><div class="panel panel-default"><div class="panel-heading">' +
+                  escapeXml(question.question) +
+                  '</div><div class="panel-body">' +
+                  escapeXml(question.question) +
+                  '</div></div></div>');
+              });
+
+              out.w(' </div>');
             });
         }
       });
