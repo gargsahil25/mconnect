@@ -69,11 +69,12 @@ module.exports = function(req, res) {
     }, function(err, results) {
         // console.log(err);
         // console.log(JSON.stringify(results));
-        commonService.sendNotification('showRating', {
+        commonService.sendNotification({
+        	'msg_type': 'showRating',
             'question': results.answer.question,
             'answer': results.answer.answer,
-            'likeCount': results.count.likeCount,
-            'dislikeCount': results.count.dislikeCount
+            'likeCount': results.count.likeCount.toString(),
+            'dislikeCount': results.count.dislikeCount.toString()
         }).then(function(response) {
             res.send(true);
         });
