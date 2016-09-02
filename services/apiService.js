@@ -46,7 +46,7 @@ module.exports.post = function(url, data, sendHeaders) {
             }
         }
 
-        //console.log("POSTING OPTIONS: ", JSON.stringify(options));
+        console.log("POSTING OPTIONS: ", JSON.stringify(options));
         request(options,
             function(error, response, body) {
                 if (error) {

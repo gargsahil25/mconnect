@@ -13,8 +13,8 @@ module.exports = function(req, res) {
 
     async.auto({
         answer: function(callback) {
-            mysqlService.execQueryParams('select * from answer a inner join question q on a.question_id = q.id where a.id = ?', [answerId]).then(function(answer) {
-                callback(null, answer);
+            mysqlService.execQueryParams('select q.question as question, a.answer as answer, a.user_id as answer_user_id from answer a inner join question q on a.question_id = q.id where a.id = ?', [answerId]).then(function(answer) {
+                callback(null, answer[0]);
             });
         },
         getRating: function(callback) {
@@ -22,15 +22,28 @@ module.exports = function(req, res) {
                 callback(null, row);
             });
         },
-        rate: ['getRating', function(callback, results) {
+        rate: ['getRating', 'answer', function(callback, results) {
             if (results.getRating && results.getRating.length > 0) {
+                if (results.getRating[0].is_like == isLike) {
+                    return callback();
+                }
                 mysqlService.execQueryParams("update answer_rating set is_like = ? where answer_id = ? and user_id = ?", [isLike, answerId, userId]).then(function(result) {
                     //console.log(result);
+                    var count = 2;
+                    if (isLike == 0) {
+                        count = -2;
+                    }
+                    commonService.increaseCount(results.answer.answer_user_id, count);
                     callback(null, result);
                 });
             } else {
                 mysqlService.execQueryParams("insert into answer_rating (answer_id, is_like, user_id) values (?,?,?)", [answerId, isLike, userId]).then(function(result) {
                     //console.log(result);
+                    var count = 1;
+                    if (isLike == 0) {
+                        count = -1;
+                    }
+                    commonService.increaseCount(results.answer.answer_user_id, count);
                     callback(null, result);
                 });
             }

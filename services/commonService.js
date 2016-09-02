@@ -15,3 +15,13 @@ module.exports.sendNotification = function(type, data) {
         }
     }, true);
 };
+
+module.exports.increaseCount = function(userId, count) {
+	//console.log(JSON.stringify(userId));
+    return mysqlService.execQueryParams("select points from user where user_id = ?", [userId]).then(function(resp) {
+    	//console.log(JSON.stringify(resp), count);
+        var newCount = parseInt(resp[0].points) + count;
+        //console.log("newCount", newCount);
+        return mysqlService.execQueryParams("update user set points = ? where user_id = ?", [newCount, userId]);
+    });
+};
