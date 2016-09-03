@@ -35,7 +35,7 @@ module.exports = function(req, res) {
             return fetchQAndA(results.question.answers).then(function(response) {
                 callback(null, response);
             });
-        }],
+        }]
 
     }
     return async.auto(config, (err, results) => {
@@ -78,7 +78,6 @@ function convert(arr) {
 function fetchQAndA(arr, callback) {
     var data = [];
     return new Promise(function(resolve, reject) {
-
         async.each(arr, function(item, callback) {
             commonService.getLikeDislikeCount(item.id).then(function(result) {
                 data.push(result);

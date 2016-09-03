@@ -100,4 +100,12 @@ module.exports.buyOneAnswer = function(userId, ansId) {
         return commonService.increaseCount(userId, -1);
     });
 }
-
+module.exports.getAllocAnsId = function(userId, quesId) {
+    return mysqlService.execQuery('select a.id from answer as a where a.id not in ( SELECT answer_id FROM buy_answer where user_id=' + userId + ') and question_id=' + quesId + ' limit 1');
+}
+module.exports.getUserPoints = function(userId) {
+    return mysqlService.execQueryParams('select points from user where user_id=?', [userId])
+}
+module.exports.getAnsById = function(ansId) {
+    return mysqlService.execQuery('select * from answer where id=' + ansId)
+}
