@@ -8,6 +8,7 @@ var commonService = require('../services/commonService');
 
 var ansId;
 var points;
+var questions;
 module.exports = function(req, res) {
     var quesId = req.query.questionId;
     var config = {
@@ -52,14 +53,15 @@ module.exports = function(req, res) {
                         }
                     });
                 } else {
-                    return questionService.getAllQuestions(1).then(function(response) {
+                    return questionService.getAllQuestions(1, quesId).then(function(response) {
+                        questions = response;
                         callback(null, response);
                     });
                 }
             });
         }
     }
-    return async.auto(config, (err, results) => {
+    async.auto(config, (err, results) => {
         var data = {
             answer: results.getBaughtAns[0],
             likedDisliked: convert(results.likedDislikedAns)
@@ -78,12 +80,45 @@ module.exports = function(req, res) {
 
         console.log(points);
         if (points > 0) {
-            template.render(data, res);
+            return template.render(data, function(err, output) {
+                res.json({
+                    type: 'answers',
+                    data: output
+                });
+            });
         } else {
-            templatePopup.render(data, res);
+            return getArrTemp().then(function(response) {
+                res.json({
+                    type: 'questions',
+                    data: response
+                });
+            });
+            // templatePopup.render(data, res);
         }
     });
 };
+
+function getArrTemp(res) {
+
+    return new Promise(function(resolve, reject) {
+        var val = [];
+        for (var i = 0; i < questions.length; i++) {
+            var data = {
+                question: questions[i]
+            }
+            templatePopup.render(data, function(err, output) {
+                if (err) {
+                    console.error('Rendering failed');
+                    return;
+                }
+                val.push(output);
+                if (questions.length == val.length) {
+                    resolve(val);
+                }
+            });
+        }
+    })
+}
 
 function fetchQAndA(arr, callback) {
     var data = [];

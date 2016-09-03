@@ -1,4 +1,4 @@
-var template = require('../templates/relatedQuestion.marko')
+var template = require('../templates/allQuestion.marko')
 var async = require('async')
 var apiService = require('../services/apiService')
 var mockUserDetails = require('../mockUserDetails');

@@ -3,19 +3,56 @@ $(".question-page").click(redirectToQuesPage);
 $("#ask-question").click(saveQuestion);
 $("#viewMore").click(viewMore);
 
+var popupData;
+
+function showNext() {
+    $('#popupArea').html('');
+    $('#popupArea').html(popupData[ptrHtml % popupData.length]);
+    $('#forceFulButton').click();
+    $("#nextButton").click(showNext);
+
+    ptrHtml++;
+}
+
 function viewMore() {
     var quesId = $('#questionId').attr('data');
 
     $.ajax({
         url: "/getMore?questionId=" + quesId,
         success: function(result) {
-            console.log(result);
-            if (result == '') {
-                window.location.assign('/allQuesPage');
+            if (result.type == 'answers') {
+                $("#addMore").append(result);
+            } else if (result.type == 'questions') {
+                popupData = result.data;
+                showPopup(result.data);
             }
-            $("#addMore").append(result);
         }
     });
+}
+var ptrHtml = 0;
+
+function submitAns() {
+    var quesId = $('#questionIdMain').attr('data');
+    var value = $('#answer').val();
+    console.log(this);
+    $.ajax({
+        url: "/save-answer?userId=1&questionId=" + quesId + "&answer=" + value,
+        success: function(result) {
+            showNext();
+        }
+    });
+
+}
+
+function showPopup(data) {
+    $('#popupArea').html(data[0]);
+    $('#forceFulButton').click();
+    $("#nextButton").click(showNext);
+    $("#submitButton").click(submitAns);
+
+
+    ptrHtml++;
+
 }
 
 function getQuestions() {
