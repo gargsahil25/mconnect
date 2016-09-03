@@ -1,11 +1,11 @@
 <div class="answer-item">
     <strong>A.</strong> ${data.answer.answer} <br/><br/>
 
-    <div data-answerid='${data.answer.id}' data-likecount='${data.answer.likeCount}' data-dislikecount='${data.answer.dislikeCount}' >
-        <span class='isLike'>${data.answer.likeCount}</span>
+    <div data-answerid='${data.answer.id}' data-likecount='0' data-dislikecount='0' >
+        <span class='isLike'>0</span>
         <span class="{?(data.likedDisliked.like[data.answer.id]);active} glyphicon glyphicon-thumbs-up buttonLike" aria-hidden="true"></span>
 
-        <span class='isDislike'>${data.answer.dislikeCount}</span>
+        <span class='isDislike'>0</span>
         <span class="{?(data.likedDisliked.like[data.answer.id]);active} glyphicon glyphicon-thumbs-down buttonDislike" aria-hidden="true"></span>
     </div>
 </div>
