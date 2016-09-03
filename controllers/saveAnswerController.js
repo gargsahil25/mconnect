@@ -12,7 +12,6 @@ module.exports = function(req, res) {
     if (!questionId || !userId || !answer) {
         res.send(false);
     }
-    console.log(answer);
     async.auto({
         saveAnswer: function(callback) {
             return mysqlService.execQueryParams('insert into answer (answer, question_id, user_id) values (?, ?, ?)', [answer, questionId, userId]).then(function(response) {
@@ -21,6 +20,11 @@ module.exports = function(req, res) {
         },
         question: function(callback) {
             return mysqlService.execQueryParams('select * from question where id = ?', [questionId]).then(function(response) {
+                callback(null, response);
+            });
+        },
+        updateAnsCount: function(callback) {
+            return mysqlService.execQueryParams('update question set answer_count = (answer_count+1) where id = ?', [questionId]).then(function(response) {
                 callback(null, response);
             });
         }
