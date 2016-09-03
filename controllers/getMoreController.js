@@ -25,7 +25,7 @@ module.exports = function(req, res) {
             if (results.getBaughtAns.length > 0) {
                 return questionService.getAnsById(results.getBaughtAns[0].id).then(function(response) {
                     fetchQAndA(response).then(function(response) {
-                        console.log(response);
+                        console.log('sjdnfisjndoinsoidnf',response);
                         callback(null, response);
                     });
                 });
