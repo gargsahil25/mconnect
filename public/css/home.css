@@ -20,3 +20,23 @@
 .question-page {
 	cursor: pointer;
 }
+.answer-item {
+	background: #eee;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 5px;
+}
+.viewMore {
+	cursor: pointer;
+}
+.glyphicon {
+    font-size: 20px;
+    padding: 10px;
+}
+.glyphicon.active {
+    color: red;
+}
+.isLike, .isDislike {
+	font-size: 20px;
+    padding: 10px;
+}
