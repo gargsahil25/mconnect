@@ -1,9 +1,60 @@
 $("#question").keyup(getQuestions);
 $(".question-page").click(redirectToQuesPage);
 $("#ask-question").click(saveQuestion);
-$("#viewMore").click(viewMore);
+$(".viewMore").click(viewMore);
+$(".buttonLike").click(incrementLikeCount);
+$(".buttonDislike").click(incrementDislikeCount);
 
 var popupData;
+
+function incrementLikeCount() {
+    console.log(this);
+    third(this, 1);
+}
+
+function incrementDislikeCount() {
+    console.log(this);
+    third(this, 0);
+
+}
+
+function third(e, isLike) {
+    var obj = e.parentElement.dataset;
+    answerId = obj.answerid;
+    if (!($(e).hasClass('active'))) {
+        $.ajax({
+            url: "/rate-answer?userId=1&answerId=" + obj.answerid + "&isLike=" + isLike,
+            success: function(result) {
+                var len = $(e.parentElement).find('.active').length;
+                if (isLike) {
+                    var likeCount = $(e.parentElement).find('.isLike').html()
+                    $(e.parentElement).find('.isLike').html(++likeCount);
+                    $(e).addClass('active');
+
+                    if (len) {
+                        $(e.parentElement).find('.buttonDislike').removeClass('active');
+                        var dislikeCount = $(e.parentElement).find('.isDislike').html()
+                        $(e.parentElement).find('.isDislike').html(--dislikeCount);
+                    }
+
+                } else {
+                    var dislikeCount = $(e.parentElement).find('.isDislike').html()
+                    $(e.parentElement).find('.isDislike').html(++dislikeCount);
+                    $(e).addClass('active');
+
+                    if (len) {
+                        $(e.parentElement).find('.buttonLike').removeClass('active');
+                        var likeCount = $(e.parentElement).find('.isLike').html()
+                        $(e.parentElement).find('.isLike').html(--likeCount);
+                    }
+                    // $(e.parentElement).find('.buttonLike').removeClass('active');
+
+                }
+            }
+        });
+    }
+
+}
 
 function showNext() {
     $('#popupArea').html('');
@@ -21,6 +72,8 @@ function viewMore() {
         url: "/getMore?questionId=" + quesId,
         success: function(result) {
             if (result.type == 'answers') {
+                $(".buttonLike").click(incrementLikeCount);
+                $(".buttonDislike").click(incrementDislikeCount);
                 $("#addMore").append(result);
             } else if (result.type == 'questions') {
                 popupData = result.data;
@@ -64,6 +117,7 @@ function getQuestions() {
         success: function(result) {
             $("#questions").html(result);
             $(".question-page").click(redirectToQuesPage);
+
         }
     });
 };

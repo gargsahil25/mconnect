@@ -20,14 +20,11 @@
             
             ${answer.answer}
 
-            <if test='!data.likedDisliked.like[answer.id]'>
-                <button type="button" class="btn btn-success">Like</button>${answer.likeCount}
-            </if>
-            <if test='!data.likedDisliked.dislike[answer.id]'>
-                <button type="button" class="btn btn-danger">Dislike</button>${answer.dislikeCount}
-            </if>
-
-            <div id='viewMore'>
+            <div data-answerid='${answer.id}' data-likecount='${answer.likeCount}' data-dislikecount='${answer.dislikeCount}' >
+            <button type="button" class="{?(data.likedDisliked.like[answer.id]);active} btn btn-success buttonLike" answerId='${answer.id}'>Like</button><span class='isLike'>${answer.likeCount}</span>
+            <button type="button" class="{?(data.likedDisliked.dislike[answer.id]);active} btn btn-danger buttonDislike">Dislike</button><span class='isDislike'>${answer.dislikeCount}</span>
+            </div>
+            <div class='viewMore'>
                 View More 
             </div>
             <br>
