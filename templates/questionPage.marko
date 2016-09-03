@@ -19,13 +19,14 @@
         <for each='answer in data.question.answers'> 
             <div class="answer-item">
                 <strong>A.</strong> ${answer.answer} <br/><br/>
-
+<!-- ${JSON.stringify(data.likedDisliked)} -->
                 <div data-answerid='${answer.id}' data-likecount='${answer.likeCount}' data-dislikecount='${answer.dislikeCount}' >
                     <span class='isLike'>${answer.likeCount}</span>
                     <span class="{?(data.likedDisliked.like[answer.id]);active} glyphicon glyphicon-thumbs-up buttonLike" aria-hidden="true"></span>
+                    <!-- ${answer.id} -->
 
                     <span class='isDislike'>${answer.dislikeCount}</span>
-                    <span class="{?(data.likedDisliked.like[answer.id]);active} glyphicon glyphicon-thumbs-down buttonDislike" aria-hidden="true"></span>
+                    <span class="{?(data.likedDisliked.dislike[answer.id]);active} glyphicon glyphicon-thumbs-down buttonDislike" aria-hidden="true"></span>
                 </div>
             </div>
             

@@ -66,19 +66,23 @@ module.exports = function(req, res) {
             answer: results.getBaughtAns[0],
             likedDisliked: convert(results.likedDislikedAns)
         };
-        if (data.answer && data.answer.length) {
-            for (var i = 0; i < data.answer.length; i++) {
-                for (var r in data.answer[i]) {
-                    if (data.answer[i][r].is_like == 0) {
-                        data.question.answers[i].dislikeCount = data.answer[i][r].count;
-                    } else if (data.answer[i][r].is_like == 1) {
-                        data.question.answers[i].likeCount = data.answer[i][r].count;
-                    }
-                }
-            }
+        if (data.answer) {
+            console.log(results);
+            // for (var i = 0; i < data.answer.length; i++) {
+            //     console.log('nbsjid', data.answer);
+            //     data.question.answers[i].dislikeCount = 0;
+            //     data.question.answers[i].likeCount = 0;
+
+            //     for (var r in data.answer[i]) {
+            //         if (data.answer[i][r].is_like == 0) {
+            //             data.question.answers[i].dislikeCount = data.answer[i][r].count;
+            //         } else if (data.answer[i][r].is_like == 1) {
+            //             data.question.answers[i].likeCount = data.answer[i][r].count;
+            //         }
+            //     }
+            // }
         }
 
-        console.log(points);
         if (points > 0) {
             return template.render(data, function(err, output) {
                 res.json({

@@ -44,6 +44,8 @@ module.exports = function(req, res) {
             likedDisliked: convert(results.likedDislikedAns)
         };
         for (var i = 0; i < results.dataWithCount.length; i++) {
+            data.question.answers[i].dislikeCount = 0;
+            data.question.answers[i].likeCount = 0;
             for (var r in results.dataWithCount[i]) {
                 if (results.dataWithCount[i][r].is_like == 0) {
                     data.question.answers[i].dislikeCount = results.dataWithCount[i][r].count;

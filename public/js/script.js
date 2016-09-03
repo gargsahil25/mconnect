@@ -8,12 +8,10 @@ $(".buttonDislike").click(incrementDislikeCount);
 var popupData;
 
 function incrementLikeCount() {
-    console.log(this);
     third(this, 1);
 }
 
 function incrementDislikeCount() {
-    console.log(this);
     third(this, 0);
 
 }
