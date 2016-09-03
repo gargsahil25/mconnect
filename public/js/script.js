@@ -87,7 +87,7 @@ function submitAns() {
     var value = $('#answer').val();
     console.log(this);
     $.ajax({
-        url: "/save-answer?userId=1&questionId=" + quesId + "&answer=" + value,
+        url: "/save-answer?notify=1&userId=1&questionId=" + quesId + "&answer=" + value,
         success: function(result) {
             showNext();
         }
