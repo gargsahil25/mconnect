@@ -1,7 +1,7 @@
 $("#question").keyup(getQuestions);
 $(".question-page").click(redirectToQuesPage);
 $("#ask-question").click(saveQuestion);
-$(".viewMore").click(viewMore);
+$("#viewMore").click(viewMore);
 $(".buttonLike").click(incrementLikeCount);
 $(".buttonDislike").click(incrementDislikeCount);
 
@@ -74,7 +74,7 @@ function viewMore() {
             if (result.type == 'answers') {
                 $(".buttonLike").click(incrementLikeCount);
                 $(".buttonDislike").click(incrementDislikeCount);
-                $("#addMore").append(result);
+                $("#addMore").append(result.data);
             } else if (result.type == 'questions') {
                 popupData = result.data;
                 showPopup(result.data);

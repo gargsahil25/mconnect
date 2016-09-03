@@ -11,7 +11,8 @@ module.exports = function(req, res) {
         getBoughtAnswers: ['question', function(callback, results) {
             return questionService.getBoughtAnswersData(1, quesId).then(function(response) {
                 if (response.length == 0) {
-                    return questionService.buyOneAnswer(1, results.question.answer_id).then(function(response) {
+                    // console.log("results.question", results.question);
+                    return questionService.buyOneAnswer(1, results.question[0].answer_id).then(function(response) {
 
                         callback(null, response);
                     });
