@@ -7,24 +7,29 @@
 
     <layout-put into="body">
 
+    <div data='${data.question.id}' id='questionId'></div>
     <div  class='col-lg-12'>
 
     <div class="container">
-  <div class="panel panel-default">
+    <div class="panel panel-default">
     <div class="panel-heading">${data.question.question}</div>
-    <div class="panel-body">
-    <for each='answer in data.question.answers'> 
-    ${answer.answer}
+    <div class="panel-body" id='addMore'>
+        <for each='answer in data.question.answers'> 
+            
+            ${answer.answer}
 
-    <if test='!data.likedDisliked.like[answer.id]'>
-    <button type="button" class="btn btn-success">Like</button>${answer.likeCount}
-    </if>
-    <if test='!data.likedDisliked.dislike[answer.id]'>
-    <button type="button" class="btn btn-danger">Dislike</button>${answer.dislikeCount}
-    </if>
+            <if test='!data.likedDisliked.like[answer.id]'>
+                <button type="button" class="btn btn-success">Like</button>${answer.likeCount}
+            </if>
+            <if test='!data.likedDisliked.dislike[answer.id]'>
+                <button type="button" class="btn btn-danger">Dislike</button>${answer.dislikeCount}
+            </if>
 
-<br>
-    </for>
+            <div id='viewMore'>
+                View More 
+            </div>
+            <br>
+        </for>
     </div>
 
          

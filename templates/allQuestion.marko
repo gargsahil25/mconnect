@@ -1,0 +1,11 @@
+<layout-use template="./base.marko">
+    <layout-put into="body">
+	<for each='question in data.questions'>
+    <div class="container">
+  		<div class="panel panel-default">
+    		<div class="panel-heading question-page" data-questionid='${question.id}' data-answercount='${question.answer_count}' data-question='${question.question}'>${question.question}  <strong>(${question.answer_count} Answers)</strong></div>
+  		</div>
+	</div>
+	</for>
+   </layout-put>
+</layout-use>
