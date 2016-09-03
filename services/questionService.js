@@ -6,24 +6,30 @@ var totalQuestions = 0;
 
 module.exports.init = function() {
     mysqlService.execQuery('select * from question').then(function(rows) {
-        totalQuestions = rows.length;
         for (var question of rows) {
-            var localityId = question.locality_id;
-            if (!wordMap[localityId]) {
-                wordMap[localityId] = {};
-            }
-            var text = question.question.replace(/[^a-zA-Z]+/g, " ").toLowerCase();
-            var words = text.split(" ");
-            for (var word of words) {
-                if (!wordMap[localityId][word]) {
-                    wordMap[localityId][word] = [];
-                }
-                wordMap[localityId][word].push(question.id);
-            }
+            update(question);
         }
         //console.log(JSON.stringify(wordMap));
     });
 };
+
+var update = function(question) {
+    var localityId = question.locality_id;
+    if (!wordMap[localityId]) {
+        wordMap[localityId] = {};
+    }
+    var text = question.question.replace(/[^a-zA-Z]+/g, " ").toLowerCase();
+    var words = text.split(" ");
+    for (var word of words) {
+        if (!wordMap[localityId][word]) {
+            wordMap[localityId][word] = [];
+        }
+        wordMap[localityId][word].push(question.id);
+    }
+    totalQuestions++;
+};
+
+module.exports.update = update;
 
 module.exports.find = function(localityId, text) {
     var map = wordMap[localityId];
@@ -74,6 +80,7 @@ module.exports.getQuestionData = function(id) {
         });
     });
 }
+
 module.exports.getBoughtAnswersData = function(id, quesId) {
     return new Promise(function(resolve, reject) {
         mysqlService.execQuery("select *,a.id as answer_id from buy_answer as ba,answer as a where ba.answer_id=a.id and ba.user_id=" + id + " and a.question_id=" + quesId).then(function(rows) {
@@ -93,3 +100,4 @@ module.exports.buyOneAnswer = function(userId, ansId) {
         return commonService.increaseCount(userId, -1);
     });
 }
+

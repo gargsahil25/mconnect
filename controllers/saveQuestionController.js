@@ -1,6 +1,7 @@
 var mysqlService = require('../services/mysqlService.js');
 var apiService = require('../services/apiService.js');
 var commonService = require('../services/commonService.js');
+var questionService = require('../services/questionService.js');
 var async = require('async')
 
 module.exports = function(req, res) {
@@ -12,13 +13,16 @@ module.exports = function(req, res) {
     }
 
     mysqlService.execQueryParams('insert into question (question, locality_id, user_id) values (?, ?, ?)', [question, localityId, userId]).then(function(response) {
-        commonService.sendNotification({
-            'msg_type': 'getAnswer',
-            'question': question,
-            'localityId': localityId,
-            'userId': userId
-        }).then(function(response) {
-            res.send(true);
+        mysqlService.execQueryParams('select * from question where id = ?', [response.insertId]).then(function(questions) {
+            questionService.update(questions[0]);
+            commonService.sendNotification({
+                'msg_type': 'getAnswer',
+                'question': question,
+                'localityId': localityId,
+                'userId': userId
+            }).then(function(response) {
+                res.send(true);
+            });
         });
     });
 };

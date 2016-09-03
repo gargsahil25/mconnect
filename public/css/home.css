@@ -3,3 +3,20 @@
     max-height: 200px;
     overflow-x: hidden;
 }
+.logo-div {
+	text-align: center;
+    margin: 20px;
+}
+.logo {
+	height: 60px;
+}
+.question-box {
+	padding: 0px 68px;
+	margin-bottom: 20px;
+}
+.rquestion-box {
+	padding: 0px 50px;
+}
+.question-page {
+	cursor: pointer;
+}
