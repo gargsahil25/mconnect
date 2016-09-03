@@ -1,6 +1,11 @@
-    
-    ${data.answer.answer}
+<div class="answer-item">
+    <strong>A.</strong> ${data.answer.answer} <br/><br/>
+
     <div data-answerid='${data.answer.id}' data-likecount='${data.answer.likeCount}' data-dislikecount='${data.answer.dislikeCount}' >
-    <button type="button" class="{?(data.likedDisliked.like[answer.id]);active} btn btn-success buttonLike" answerId='${data.answer.id}'>Like</button><span class='isLike'>${data.answer.likeCount}</span>        
-    <button type="button" class="{?(data.likedDisliked.dislike[answer.id]);active} btn btn-danger buttonDislike">Dislike</button><span class='isDislike'>${data.answer.dislikeCount}</span>
+        <span class='isLike'>${data.answer.likeCount}</span>
+        <span class="{?(data.likedDisliked.like[answer.id]);active} glyphicon glyphicon-thumbs-up buttonLike" aria-hidden="true"></span>
+
+        <span class='isDislike'>${data.answer.dislikeCount}</span>
+        <span class="{?(data.likedDisliked.like[answer.id]);active} glyphicon glyphicon-thumbs-down buttonDislike" aria-hidden="true"></span>
     </div>
+</div>
