@@ -12,6 +12,7 @@ app.use(express.static(__dirname + '/public'));
 // pages
 app.get('/', require('./controllers/homePageController'));
 app.get('/question', require('./controllers/questionPageController'));
+app.get('/getMore', require('./controllers/getMoreController'));
 
 // api
 app.get('/related-question', require('./controllers/relatedQuestionController'));

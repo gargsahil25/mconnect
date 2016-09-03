@@ -1,0 +1,7 @@
+    ${data.answer.answer}
+    <if test='!data.likedDisliked.like[data.answer.id]'>
+    <button type="button" class="btn btn-success">Like</button>${data.answer.likeCount}
+    </if> 
+    <if test='!data.likedDisliked.dislike[data.answer.id]'> 
+    <button type="button" class="btn btn-danger">Dislike</button>${data.answer.dislikeCount}
+    </if> 
