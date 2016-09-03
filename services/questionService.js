@@ -109,3 +109,6 @@ module.exports.getUserPoints = function(userId) {
 module.exports.getAnsById = function(ansId) {
     return mysqlService.execQuery('select * from answer where id=' + ansId)
 }
+module.exports.getAllQuestions = function(userId) {
+    return mysqlService.execQuery('select * from question where user_id=' + userId + ' order by answer_count desc');
+}

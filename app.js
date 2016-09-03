@@ -15,6 +15,7 @@ app.use(favicon(__dirname + '/public/img/favicon.ico'));
 app.get('/', require('./controllers/homePageController'));
 app.get('/question', require('./controllers/questionPageController'));
 app.get('/getMore', require('./controllers/getMoreController'));
+app.get('/allQuesPage', require('./controllers/allQuesPageController'));
 
 // api
 app.get('/related-question', require('./controllers/relatedQuestionController'));

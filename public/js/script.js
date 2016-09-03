@@ -1,7 +1,22 @@
-
 $("#question").keyup(getQuestions);
 $(".question-page").click(redirectToQuesPage);
 $("#ask-question").click(saveQuestion);
+$("#viewMore").click(viewMore);
+
+function viewMore() {
+    var quesId = $('#questionId').attr('data');
+
+    $.ajax({
+        url: "/getMore?questionId=" + quesId,
+        success: function(result) {
+            console.log(result);
+            if (result == '') {
+                window.location.assign('/allQuesPage');
+            }
+            $("#addMore").append(result);
+        }
+    });
+}
 
 function getQuestions() {
     $("#questions").html('');
@@ -37,7 +52,7 @@ function getAnswer(questionId, question) {
 
 function saveQuestion() {
     var question = $("#question").val();
-    if(!question) {
+    if (!question) {
         return;
     }
     $.ajax({
