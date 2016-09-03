@@ -2,12 +2,14 @@ require('marko/node-require').install()
 
 var express = require('express');
 var bodyParser = require('body-parser');
+var favicon = require('serve-favicon');
 var questionService = require('./services/questionService');
 var app = express();
 
 app.use(bodyParser.json({ limit: '50mb' }))
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 app.use(express.static(__dirname + '/public'));
+app.use(favicon(__dirname + '/public/img/favicon.ico'));
 
 // pages
 app.get('/', require('./controllers/homePageController'));
